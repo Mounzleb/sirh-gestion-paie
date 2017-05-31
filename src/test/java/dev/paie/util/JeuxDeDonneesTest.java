@@ -30,13 +30,13 @@ public class JeuxDeDonneesTest {
 		bulletin1 = context.getBean("bulletin1", BulletinSalaire.class);
 
 	}
-	
-	
+
 	// teste nous permettant de vérifier que bulletin1 est bien instancié
 	@Test
-    public void test_bulletin1_notnull() {
-        assertNotNull(bulletin1);
-    }
+	public void test_bulletin1_notnull() {
+		assertNotNull(bulletin1);
+	}
+
 	@Test
 
 	public void test_primeExceptionnelle() {
@@ -73,63 +73,61 @@ public class JeuxDeDonneesTest {
 
 	}
 
-//	@Test
-//
-//	public void test_cotisationsNonImposables() {
-//
-//		List<Cotisation> cotisationsNonImposables = bulletin1.getRemunerationEmploye(
-//
-//		).getProfilRemuneration()
-//
-//				.getCotisationsNonImposables();
-//
-//		Stream.of("EP01", "EP02", "EP03", "EP04", "EP05", "EP06", "EP07", "EP12",
-//
-//				"EP19", "EP20", "EPR1", "E900",
-//
-//				"EP28", "EP37")
-//
-//				.forEach(code -> assertTrue("verification code " + code,
-//
-//						cotisationsNonImposables.stream().filter(c -> c.getCode()
-//
-//								.equals(code)).findAny().isPresent()));
-//
-//	}
-//
-//	@Test
-//
-//	public void test_cotisationImposables() {
-//
-//		List<Cotisation> cotisationsImposables = bulletin1.getRemunerationEmploye()
-//
-//				.getProfilRemuneration()
-//
-//				.getCotisationsImposables();
-//
-//		Stream.of("SP01", "SP02")
-//
-//				.forEach(code -> assertTrue("verification code " + code,
-//
-//						cotisationsImposables.stream().filter(c -> c.getCode().equals
-//
-//						(code)).findAny().isPresent()));
-//
-//	}
-//
-//	@Test
-//
-//	public void test_grade() {
-//
-//		assertThat(bulletin1.getRemunerationEmploye().getGrade().getNbHeuresBase(),
-//
-//				equalTo(new BigDecimal("151.67")));
-//
-//		assertThat(bulletin1.getRemunerationEmploye().getGrade().getTauxBase(),
-//
-//				equalTo(new BigDecimal("11.0984")));
-//
-//	}
+	@Test
+
+	public void test_cotisationsNonImposables() {
+
+		List<Cotisation> cotisationsNonImposables = bulletin1.getRemunerationEmploye().getProfilRemuneration()
+				.getCotisationsNonImposables();
+
+		Stream.of("EP01", "EP02", "EP03", "EP04", "EP05", "EP06", "EP07", "EP12",
+
+				"EP19", "EP20", "EPR1", "E900",
+
+				"EP28", "EP37")
+
+				.forEach(code -> assertTrue("verification code " + code,
+
+						cotisationsNonImposables.stream().filter(c -> c.getCode()
+
+								.equals(code)).findAny().isPresent()));
+
+	}
+	
+	 @Test
+	
+	 public void test_cotisationImposables() {
+	
+	 List<Cotisation> cotisationsImposables =
+	 bulletin1.getRemunerationEmploye()
+	
+	 .getProfilRemuneration()
+	
+	 .getCotisationsImposables();
+	
+	 Stream.of("SP01", "SP02")
+	
+	 .forEach(code -> assertTrue("verification code " + code,
+	
+	 cotisationsImposables.stream().filter(c -> c.getCode().equals
+	
+	 (code)).findAny().isPresent()));
+	
+	 }
+	
+	 @Test
+	
+	 public void test_grade() {
+	
+	 assertThat(bulletin1.getRemunerationEmploye().getGrade().getNbHeuresBase(),
+	
+	 equalTo(new BigDecimal("151.67")));
+	
+	 assertThat(bulletin1.getRemunerationEmploye().getGrade().getTauxBase(),
+	
+	 equalTo(new BigDecimal("11.0984")));
+	
+	 }
 
 	@After
 
