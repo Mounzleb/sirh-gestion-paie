@@ -46,8 +46,17 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		// map etc...
 		BigDecimal total_retenue_salarial=  cotisationsNonImposables.stream()
 				.filter(cotisation -> cotisation.getTauxSalarial() != null)
+				.peek(System.out::println)
 				.map(cotis -> cotis.getTauxSalarial())
 				.map(retenue_salarial -> retenue_salarial.multiply(salaire_brut))
+				.peek(System.out::println)
+				.collect(Collectors.reducing((v1,v2) -> v1.add(v2))).get();
+		
+		
+		BigDecimal total_cotisations_patronales = cotisationsNonImposables.stream()
+				.filter(cotisation -> cotisation.getTauxPatronal() != null)
+				.map(cotisationPatro -> cotisationPatro.getTauxPatronal())
+				.map(cotisation_patronal -> cotisation_patronal.multiply(salaire_brut))
 				.collect(Collectors.reducing((v1,v2) -> v1.add(v2))).get();
 
 		// ici je converie mon salaireBrute qui est de type BigDecimal en type
@@ -55,6 +64,9 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		resultat.setSalaireDeBase(paieUtils.formaterBigDecimal(salaire_base));
 		resultat.setSalaireBrut(paieUtils.formaterBigDecimal(salaire_brut));
 		resultat.setTotalRetenueSalarial(paieUtils.formaterBigDecimal(total_retenue_salarial));
+		resultat.setTotalCotisationsPatronales(paieUtils.formaterBigDecimal(total_cotisations_patronales));
+		
+		
 		return resultat;
 	}
 
