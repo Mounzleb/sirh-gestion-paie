@@ -17,10 +17,24 @@
 	<!-- on crée notre bean bulletin1 et on valorise primeExceptionnel à 1000 
 		( car le test le demande) -->
 	<bean id="bulletin1" class="dev.paie.entite.BulletinSalaire"
-		p:primeExceptionnelle="1000"></bean>
+		p:primeExceptionnelle="1000">
+		<property name="remunerationEmploye" ref="remuneration1"></property>
 		
-		
+	</bean>
+
+	<bean id="remuneration1" class="dev.paie.entite.RemunerationEmploye">
+		<property name="matricule" value="M01"></property>
+		<property name="entreprise" ref ="entreprise1" ></property>
+	</bean>
 	
+	<bean id="entreprise1" class="dev.paie.entite.Entreprise">
+		<property name="siret" value="80966785000022"></property>
+		<property name="denomination" value="Dev Entreprise"></property>
+		<property name="codeNaf" value="6202A"></property>
+	</bean>
+
+
+
 
 	<!-- importer une configuration dans une autre -->
 	<import resource="classpath:cotisations-imposables.xml" />
