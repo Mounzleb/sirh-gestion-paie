@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- exemple de valorisation de liste -->
+	<bean id="profil1" class="dev.paie.entite.ProfilRemuneration">
+		<property name="cotisationsNonImposables">
+			<util:list value-type="dev.paie.entite.Cotisation">
+				<ref bean="ep01" />
+			</util:list>
+		</property>
+	</bean>
+
+	<!-- on crée notre bean bulletin1 et on valorise primeExceptionnel à 1000 
+		( car le test le demande) -->
+	<bean id="bulletin1" class="dev.paie.entite.BulletinSalaire"
+		p:primeExceptionnelle="1000"></bean>
+		
+		
+	
+
+	<!-- importer une configuration dans une autre -->
+	<import resource="classpath:cotisations-imposables.xml" />
+	<import resource="classpath:cotisations-non-imposables.xml" />
+
+
+</beans>
