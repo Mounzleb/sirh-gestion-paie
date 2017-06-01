@@ -27,7 +27,7 @@ public class CotisationServiceJpaTest {
 	@Test
 	public void test_sauvegarder_lister_mettre_a_jour() {
 		// TODO sauvegarder une nouvelle cotisation
-		System.out.println("Pierre l'ebrabouilleur de bête");
+		System.out.println("nous sommes dans test_sauvegarder_lister_mettre_a_jour");
 		Cotisation newcotisation = new Cotisation();
 		newcotisation.setId((int) (Math.random() * 100000));
 		newcotisation.setCode("code");
