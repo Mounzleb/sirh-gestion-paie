@@ -1,8 +1,14 @@
 package dev.paie.service;
 
+import static org.junit.Assert.*;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import javax.swing.tree.RowMapper;
+import javax.swing.tree.TreePath;
+
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +38,14 @@ public class GradeServiceJdbcTemplateTest {
 		saveGrade.setTauxBase(new BigDecimal("0.8"));
 
 		gradeService.sauvegarder(saveGrade);
+		
+		// Sans les assert, notre test ne test absolument rien du tout
+		assertThat(gradeService.lister().stream().anyMatch(g -> g.getCode().equals( saveGrade.getCode())), CoreMatchers.equalTo(true));
+		// c'est deux ligne sont exactement equivalent et font exactement la même chose
+		assertTrue(gradeService.lister().stream().anyMatch(g -> g.getCode().equals( saveGrade.getCode())));
 
 	}
 
-	// @Test
-	// public void test_lister() {
-	//
-	// }
 	@Test
 	public void test_mettre_a_jour() {
 
@@ -51,5 +58,9 @@ public class GradeServiceJdbcTemplateTest {
 
 		gradeService.mettre_a_jour(updateGrade);
 
+		
+		assertTrue(gradeService.lister().stream().anyMatch(g -> g.getCode().equals( updateGrade.getCode())));
 	}
+
+
 }
