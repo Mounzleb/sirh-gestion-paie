@@ -1,0 +1,45 @@
+package dev.paie.service;
+
+import java.math.BigDecimal;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import dev.paie.config.JeuxDeDonneesConfig;
+import dev.paie.config.ServicesConfig;
+import dev.paie.entite.Grade;
+import dev.paie.spring.DataSourceMySQLConfig;
+
+@ContextConfiguration(classes = { ServicesConfig.class, JeuxDeDonneesConfig.class, DataSourceMySQLConfig.class})
+@RunWith(SpringRunner.class)
+public class GradeServiceJdbcTemplateTest {
+
+	@Autowired
+	private GradeService gradeService;
+
+	@Test
+	public void test_sauvegarder() {
+		Grade saveGrade = new Grade();
+		
+		
+		saveGrade.setId(1);
+		saveGrade.setCode("code essaie 1");
+		saveGrade.setNbHeuresBase(new BigDecimal("200.0"));
+		saveGrade.setTauxBase(new BigDecimal("0.8"));
+		
+		
+		gradeService.sauvegarder(saveGrade );
+
+	}
+//	@Test
+//	public void test_lister() {
+//
+//	}
+//	@Test
+//	public void test_mettre_a_jour() {
+//
+//	}
+}
