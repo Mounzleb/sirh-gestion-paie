@@ -1,78 +1,68 @@
 package dev.paie.service;
 
-import java.nio.channels.NetworkChannel;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import dev.paie.entite.Grade;
 
+/**
+ * Script création de la table : 
+ * 
+CREATE TABLE `GRADE` (
+  `ID` int(11) NOT NULL,
+  `CODE` varchar(200) NOT NULL,
+  `NB_HEURES_BASE` decimal(10,2) NOT NULL,
+  `TAUX_BASE` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ *
+ */
 @Service
 public class GradeServiceJdbcTemplate implements GradeService {
-
-	private JdbcTemplate jdbcTemplate;
+	
+	// dans le commit précedent j'ai utilisé une class pour le RowMapper et ici on le met dans une constante et on utilise un lambda.
+	// ça fait nes en moins la même chose 
+	private static final RowMapper<Grade> GRADE_MAPPER = (rs, rowNum) -> new Grade(rs.getInt("ID"), rs.getString("code"), rs.getBigDecimal("nbHeuresBase"), rs.getBigDecimal("tauxBase"));
+	
+	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public GradeServiceJdbcTemplate(DataSource dataSource) {
-
 		super();
-
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	public Map<String, Object> creerParametres(Grade grade) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("ID", grade.getId());
+		parameters.put("CODE", grade.getCode());
+		parameters.put("NB_HEURES_BASE", grade.getNbHeuresBase());
+		parameters.put("TAUX_BASE", grade.getTauxBase());
+		return parameters;
 	}
 
 	@Override
-	public void sauvegarder(Grade saveGrade) {
-		String sql = "INSERT INTO grade (ID, code, nbHeuresBase, tauxbase) VALUES (?, ?, ?,? )";
-		this.jdbcTemplate.update(sql, saveGrade.getId(), saveGrade.getCode(), saveGrade.getNbHeuresBase(),
-				saveGrade.getTauxBase());
+	public void sauvegarder(Grade nouveauGrade) {
+		this.jdbcTemplate.update("insert into grade (ID,code,nbHeuresBase,tauxbase) VALUES(:ID,:CODE,:NB_HEURES_BASE,:TAUX_BASE)",
+				creerParametres(nouveauGrade));
+	}
+
+	@Override
+	public void mettre_a_jour(Grade gradeAModifier) {
+		this.jdbcTemplate.update("update grade set code=:CODE,nbHeuresBase=:NB_HEURES_BASE,tauxbase=:TAUX_BASE where ID=:ID",
+				creerParametres(gradeAModifier));
 	}
 
 	@Override
 	public List<Grade> lister() {
-
-		
-		// je recupére mes lignes de table dans la base de données.
-		// Grâce au RowMapper, je transforme chaque ligne en objet
-		// je stoque c'est objet dans une liste de grade
-
-		String sql = "SELECT * FROM grade";
-		return this.jdbcTemplate.query(sql, new GradeMapper());
-
-	}
-
-	@Override
-	public void mettre_a_jour(Grade updateGrade) {
-		String sql = "UPDATE grade SET ID = ?, code = ?, nbHeuresBase = ?, tauxbase = ? WHERE grade.ID = 1 ";
-		this.jdbcTemplate.update(sql, updateGrade.getId(), updateGrade.getCode(), updateGrade.getNbHeuresBase(),
-				updateGrade.getTauxBase());
-	}
-
-	// ici j'ai une classe interne pour pouvoir utiliser mon RowMapper ( jaurais
-	// pu egalement le faire dans un autre fichier class)
-	public class GradeMapper implements RowMapper<Grade> {
-
-		// le RowMapper va me permettre de transformer chaque turplet (ligne de
-		// tables de base de donnée) en un objet
-		@Override
-		public Grade mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-			Grade g = new Grade();
-			g.setId(rs.getInt("ID"));
-			g.setCode(rs.getString("code"));
-			g.setNbHeuresBase(rs.getBigDecimal("nbHeuresBase"));
-			g.setTauxBase(rs.getBigDecimal("tauxbase"));
-
-			return g;
-		}
-
+		return this.jdbcTemplate.query("select * from grade", GRADE_MAPPER);
 	}
 
 }

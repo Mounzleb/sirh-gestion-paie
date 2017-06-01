@@ -9,6 +9,19 @@ public class Grade {
 	private BigDecimal nbHeuresBase;
 	private BigDecimal tauxBase;
 	
+	
+	public Grade(){
+		
+	}
+
+	public Grade(Integer id, String code, BigDecimal nbHeuresBase, BigDecimal tauxBase) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.nbHeuresBase = nbHeuresBase;
+		this.tauxBase = tauxBase;
+	}
+
 	public String getCode() {
 		return code;
 	}
