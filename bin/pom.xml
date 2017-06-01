@@ -66,28 +66,6 @@
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-		</dependency>
-
-		<!-- API JPA -->
-
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<version>1.0.0.Final</version>
-		</dependency>
-
-		<!-- Implémentation JPA -->
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.1.0.Final</version>
-			<scope>runtime</scope>
-		</dependency>
-
 
 		<!-- exemple de connecteur jdbc -->
 
@@ -96,6 +74,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.41</version>
 		</dependency>
-
+		
 	</dependencies>
 </project>
