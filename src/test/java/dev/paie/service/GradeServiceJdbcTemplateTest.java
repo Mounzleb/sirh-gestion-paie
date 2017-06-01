@@ -1,6 +1,7 @@
 package dev.paie.service;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,8 +39,18 @@ public class GradeServiceJdbcTemplateTest {
 //	public void test_lister() {
 //
 //	}
-//	@Test
-//	public void test_mettre_a_jour() {
-//
-//	}
+	@Test
+	public void test_mettre_a_jour() {
+		
+		Grade updateGrade = new Grade();
+		
+		updateGrade.setId(2);
+		updateGrade.setCode(UUID.randomUUID().toString());
+		updateGrade.setNbHeuresBase(new BigDecimal("300.0"));
+		updateGrade.setTauxBase(new BigDecimal("0.6"));
+		
+		
+		gradeService.mettre_a_jour(updateGrade);
+
+	}
 }

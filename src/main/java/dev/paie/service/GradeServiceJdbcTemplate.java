@@ -26,7 +26,8 @@ public class GradeServiceJdbcTemplate implements GradeService {
 	@Override
 	public void sauvegarder(Grade saveGrade) {
 		String sql = "INSERT INTO grade (ID, code, nbHeuresBase, tauxbase) VALUES (?, ?, ?,? )";
-		this.jdbcTemplate.update(sql, saveGrade.getId(), saveGrade.getCode(), saveGrade.getNbHeuresBase(), saveGrade.getTauxBase());
+		this.jdbcTemplate.update(sql, saveGrade.getId(), saveGrade.getCode(), saveGrade.getNbHeuresBase(),
+				saveGrade.getTauxBase());
 	}
 
 	@Override
@@ -37,8 +38,8 @@ public class GradeServiceJdbcTemplate implements GradeService {
 
 	@Override
 	public void mettre_a_jour(Grade updateGrade) {
-		// TODO Auto-generated method stub
-
+		String sql = "UPDATE grade SET ID = ?, code = ?, nbHeuresBase = ?, tauxbase = ? WHERE grade.ID = 1 ";
+		this.jdbcTemplate.update(sql, updateGrade.getId(), updateGrade.getCode(), updateGrade.getNbHeuresBase(), updateGrade.getTauxBase() );
 	}
 
 }
