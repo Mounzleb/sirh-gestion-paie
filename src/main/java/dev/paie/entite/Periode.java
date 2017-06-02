@@ -9,6 +9,15 @@ import javax.persistence.Id;
 
 @Entity
 public class Periode {
+	
+	public Periode(){
+		
+	}
+	public Periode(LocalDate dateDebut, LocalDate dateFin) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;

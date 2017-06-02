@@ -1,7 +1,7 @@
 package dev.paie.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import dev.paie.entite.Cotisation;
 import dev.paie.entite.Entreprise;
 import dev.paie.entite.Grade;
+import dev.paie.entite.Periode;
 import dev.paie.entite.ProfilRemuneration;
 
 @Service
@@ -36,6 +37,16 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 		context.getBeansOfType(Entreprise.class).forEach((idEntreprise, entreprise) -> em.persist(entreprise));
 		context.getBeansOfType(ProfilRemuneration.class).forEach((idprofRem, profRem) -> em.persist(profRem));
 		context.getBeansOfType(Cotisation.class).forEach((idCotis, cotisation) -> em.persist(cotisation));
+
+		/*
+		 * générer les données de périodes : 12 périodes programmatiquement de
+		 * l’année courante.
+		 */
+		for (int mois = 1; mois < 13; mois++) {
+			LocalDate aujourdhui = LocalDate.now();
+			LocalDate localdate = LocalDate.of(aujourdhui.getYear(), mois, 1);
+			em.persist(new Periode(localdate, localdate.with(TemporalAdjusters.lastDayOfMonth())));
+		}
 
 	}
 
