@@ -16,10 +16,7 @@ public class InitController implements ApplicationListener<ContextRefreshedEvent
 //    	initDonne.initialiserGrade();
     	System.out.println("Contexte créé " + initDonne);
     	
-    	initDonne.initialiserGrade();
-    	initDonne.intialiserEntreprise();
-    	initDonne.initialiserCotisation();
-    	initDonne.initialiserProfilsRemunerations();
+    	initDonne.initialiserDonne();
 
     }
 }
