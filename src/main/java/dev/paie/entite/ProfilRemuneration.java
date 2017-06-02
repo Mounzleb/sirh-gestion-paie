@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -17,12 +19,30 @@ public class ProfilRemuneration {
 	private String code;
 
 	@ManyToMany
+	@JoinTable(
+			name="profil_cotis_non_imposables",
+			joinColumns = 	@JoinColumn(name="id_profil", referencedColumnName="id"),
+			inverseJoinColumns = @JoinColumn(name="id_cotis", referencedColumnName="id")
+			)
 	private List<Cotisation> cotisationsNonImposables;
 	
+	/*
+	 * Dans le ManyToMany on crée une table de jointure entre deux autres
+	 * tables. Nos deux tables ici sont profilRemuneration et cotisation
+	 */
 	@ManyToMany
+	@JoinTable(
+			name="profil_cotis_imposables",
+			joinColumns = 	@JoinColumn(name="id_profil", referencedColumnName="id"),
+			inverseJoinColumns = @JoinColumn(name="id_cotis", referencedColumnName="id")
+			)
 	private List<Cotisation> cotisationsImposables;
 	
+	
 	@ManyToMany
+	@JoinTable(
+			name="profil_avantage"
+			)
 	private List<Avantage> avantages;
 
 	public Integer getId() {

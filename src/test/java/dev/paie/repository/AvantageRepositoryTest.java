@@ -55,10 +55,12 @@ public class AvantageRepositoryTest {
 		// TODO modifier un avantage et tester si la modification sur le nom à
 		// bien etais faite
 		// A VERIFIER SI IL VERIFIE BIEN LE CHANGEMENT
-		Avantage av2 = avantageRepository.findOne(5);
-		av2.setNom("Hollaaaaa");
-		avantageRepository.save(av2);
-		assertTrue(avantageRepository.findOne(5).getNom().equals("Hollaaaaa"));
+		
+		// TODO ici à faire le test de modification. Il faut utiliser une liste pour
+//		Avantage av2 = avantageRepository.findOne();
+//		av2.setNom("nom");
+//		avantageRepository.save(av2);
+//		assertTrue(avantageRepository.findOne().getNom().equals("nom"));
 
 		// Voir pour faire la verification sur toute la base de donnée, car la
 		// il verifie uniquement pour un id donner ici dans notre cas c'est id=5

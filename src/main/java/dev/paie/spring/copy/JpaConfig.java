@@ -1,4 +1,4 @@
-package dev.paie.spring;
+package dev.paie.spring.copy;
 
 import java.util.Properties;
 
