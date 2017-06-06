@@ -26,26 +26,24 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="navbar-brand" href="#">Mettre un titre</a>
+				<a class="navbar-brand" href="lister">Pro RH</a>
 			</div>
-			<div id="navbar" class="navbar-collapse collapse">
+			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/paie/index.html">Home</a></li>
-					<li class="active"><a href="/paie/mvc/employes/lister">Employes</a></li>
-					<li><a href="/paie/mvc/bulletins/lister">Bulletins</a></li>
+					<li><a href="/paie/mvc/employes/lister">Employes</a></li>
+					<li class="active"><a href="activites">Activités</a></li>
 				</ul>
 			</div>
-				
-			</div>
 			<!--/.nav-collapse -->
-	
+		</div>
 	</nav>
-	<br>
-	<br>
-	<br>
 	
-	<a href="/paie/mvc/employes/lister" class="btn btn-lg btn-warning"><span
-		class="glyphicon glyphicon-arrow-left"> lister employé</span> </a>
+	<br>
+	<br>
+	<br>
+	<a href="/paie/mvc/bulletins/lister" type="button"
+		class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-plus"></span> lister bulletin</a>
 	<br>
 	<br>
 	<br>
@@ -55,9 +53,36 @@
 			<!-- Form Name -->
 			<legend>Ajouter un employé</legend>
 
-			<!-- Text input-->
+			<!-- Select Basic Periode -->
+
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="matricule">Matricule</label>
+				<label class="col-md-4 control-label" for="selectbasic">Periode</label>
+				<div class="col-md-4">
+					<select id="Entreprise" name="periode" class="form-control">
+						<c:forEach var="periode" items="${listPeriodes}">
+							<option value="${periode.id}">${periode.dateDebut}</option>
+						</c:forEach>
+					</select>
+					<!-- </select> -->
+				</div>
+			</div>
+
+			<!-- Select Basic Matricule -->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="selectbasic">Matricule ${listEmploye}</label>
+				<div class="col-md-4">
+					<select id="Matricule" name="matricule" class="listeProfil">
+						<c:forEach var="matricule" items="${listEmploye}">
+							<option value="${matricule.id}">${matricule.code}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+
+			<!-- Text input Prime Exceptionnelle-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="matricule">Prime
+					Exceptionnelle</label>
 				<div class="col-md-4">
 					<input id="matricule" name="matricule" type="text" placeholder=""
 						class="form-control input-md">
@@ -65,43 +90,7 @@
 				</div>
 			</div>
 
-			<!-- Select Basic Entreprise -->
 
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="selectbasic">Entreprise</label>
-				<div class="col-md-4">
-					<select id="Entreprise" name="entreprise" class="form-control">
-						<c:forEach var="entreprise" items="${listeEntreprise}">
-							<option value="${entreprise.id}">${entreprise.denomination}</option>
-						</c:forEach>
-					</select>
-					<!-- </select> -->
-				</div>
-			</div>
-
-			<!-- Select Basic Profil de Remuneration -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="selectbasic">Profil</label>
-				<div class="col-md-4">
-					<select id="Profil" name="profil" class="listeProfil">
-						<c:forEach var="profil" items="${listeProfil}">
-							<option value="${profil.id}">${profil.code}</option>
-						</c:forEach>
-					</select>
-				</div>
-			</div>
-
-			<!-- Select Basic Grade -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="selectbasic">Grade</label>
-				<div class="col-md-4">
-					<select id="Grade" name="grade" class="form-control">
-						<c:forEach var="grade" items="${listeGrade}">
-							<option value="${grade.id}">${grade.code}</option>
-						</c:forEach>
-					</select>
-				</div>
-			</div>
 
 
 			<!-- Button -->

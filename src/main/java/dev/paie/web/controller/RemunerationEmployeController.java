@@ -28,9 +28,6 @@ public class RemunerationEmployeController {
 	@Autowired
 	RemunerationEmployeRepository remunerationEmployeRepository;
 
-//	List<Entreprise> listeEntreprise = new ArrayList<>();
-//	List<Grade> listeGrade = new ArrayList<>();
-//	List<ProfilRemuneration> listProfile = new ArrayList<>();
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
 	public ModelAndView creerEmploye() {

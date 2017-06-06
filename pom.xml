@@ -135,8 +135,27 @@
 			<version>5.1.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
-		
-		
+
+		<!-- Ajouter les dépendances suivantes vers Spring Security Web & Config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+
+		<!--Pour compléter le Token CSRF, nous allons utiliser un taglib Spring 
+			Security. -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
 
 	</dependencies>
 </project>

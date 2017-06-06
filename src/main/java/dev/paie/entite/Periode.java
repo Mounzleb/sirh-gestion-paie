@@ -43,6 +43,10 @@ public class Periode {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	@Override
+	public String toString() {
+		return "Periode [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + "]";
+	}
 	
 	
 	

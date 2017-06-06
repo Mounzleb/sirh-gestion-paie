@@ -38,13 +38,14 @@
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
-	
+
 	<br>
 	<br>
 	<br>
-	<a href="/paie/mvc/employes/creer" type="button"
-		class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-plus"></span> créer employer</a>
-		
+	<a href="/paie/mvc/bulletins/creer" type="button"
+		class="btn btn-sm btn-warning"><span
+		class="glyphicon glyphicon-plus"></span> créer bulletin</a>
+
 	<br>
 	<br>
 	<br>
@@ -53,14 +54,14 @@
 		<table class="table table-bordered">
 			<thead align="center">
 				<td>Date/heure creation</td>
+				<td>Periode</td>
 				<td>Matricule</td>
-				<td>Grade</td>
 			</thead>
 			<tbody align="center">
-				<c:forEach var="employes" items="${employes}">
-					<td>${employes.dateForm()}</td>
-					<td>${employes.matricule}</td>
-					<td>${employes.grade.code}</td>
+				<c:forEach var="bulletins" items="${bulletins}">
+					<td>${ bulletin.dateForm() }</td>
+					<td>${ bulletin.periode }</td>
+					<td>${ bulletin.remunerationEmploye.matricule }</td>
 				</c:forEach>
 			</tbody>
 		</table>

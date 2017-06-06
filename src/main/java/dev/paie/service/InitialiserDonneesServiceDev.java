@@ -16,6 +16,7 @@ import dev.paie.entite.Entreprise;
 import dev.paie.entite.Grade;
 import dev.paie.entite.Periode;
 import dev.paie.entite.ProfilRemuneration;
+import dev.paie.entite.User;
 
 @Service
 public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
@@ -33,6 +34,11 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 	@Override
 	@Transactional
 	public void initialiserDonne() {
+		
+		
+		User user1 = new User(1, "user1","password1");
+		User user2 = new User(2, "user2", "password2");
+		User user3 = new User(3, "user3", "password3");
 		context.getBeansOfType(Grade.class).forEach((idGrade, grade) -> em.persist(grade));
 		context.getBeansOfType(Entreprise.class).forEach((idEntreprise, entreprise) -> em.persist(entreprise));
 		context.getBeansOfType(ProfilRemuneration.class).forEach((idprofRem, profRem) -> em.persist(profRem));
