@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import dev.paie.entite.Grade;
 import dev.paie.entite.Periode;
 import dev.paie.entite.ProfilRemuneration;
 import dev.paie.entite.User;
+import dev.paie.entite.User.ROLES;
 
 @Service
 public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
@@ -27,6 +29,8 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 	 */
 	@Autowired
 	ApplicationContext context;
+	
+	@Autowired PasswordEncoder passwordEncoder;
 
 	@PersistenceContext
 	EntityManager em;
@@ -36,9 +40,16 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 	public void initialiserDonne() {
 		
 		
-		User user1 = new User(1, "user1","password1");
-		User user2 = new User(2, "user2", "password2");
-		User user3 = new User(3, "user3", "password3");
+		User user1 = new User(null, "user1", this.passwordEncoder.encode("password1"), true, ROLES.ROLE_ADMINISTRATEUR);
+		User user2 = new User(null, "user2", this.passwordEncoder.encode("password2") , true, ROLES.ROLE_ADMINISTRATEUR);
+		User user3 = new User(null, "user3", this.passwordEncoder.encode("password3") , true, ROLES.ROLE_ADMINISTRATEUR);
+		
+		em.persist(user1);
+		em.persist(user2);
+		em.persist(user3);
+
+		
+		
 		context.getBeansOfType(Grade.class).forEach((idGrade, grade) -> em.persist(grade));
 		context.getBeansOfType(Entreprise.class).forEach((idEntreprise, entreprise) -> em.persist(entreprise));
 		context.getBeansOfType(ProfilRemuneration.class).forEach((idprofRem, profRem) -> em.persist(profRem));
